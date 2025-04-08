@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compostaqui - Mapeamento</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'eco-green': '#2e8b57',
+            'eco-light': '#3cb371',
+            'eco-dark': '#228b22',
+            'eco-blue': '#1e90ff',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="bg-gray-50 font-sans">
+  <div class="max-w-md mx-auto bg-white h-screen flex flex-col">
+    <!-- Header -->
+    <div class="p-4 bg-eco-green text-white">
+      <h1 class="text-xl font-bold text-center">Compostaqui</h1>
+      <div class="mt-3 relative">
+        <input id="search-input" type="text" placeholder="Buscar região ou biodigestor..."
+               class="w-full py-2 px-4 pr-10 rounded-full text-gray-800 focus:outline-none search-box">
+        <i class="fas fa-search absolute right-3 top-2.5 text-gray-500"></i>
+      </div>
+    </div>
+
+    <!-- Mapa -->
+    <div class="flex-1 relative">
+      <div class="map-container"><div id="map"></div></div>
+
+      <!-- Botões do mapa -->
+      <div class="absolute bottom-4 right-4 flex flex-col space-y-2 z-20">
+        <button id="locate-btn" class="bg-white p-2 rounded-full shadow-md text-eco-green">
+          <i class="fas fa-location-arrow"></i>
+        </button>
+      </div>
+
+      <!-- Cartão do biodigestor -->
+      <div id="biodigestor-card" class="hidden absolute bottom-4 left-0 right-0 mx-4 bg-white rounded-lg shadow-lg p-4 z-20">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="font-bold text-lg text-eco-dark">Biodigestor</h3>
+            <p class="text-gray-600 text-sm">Capacidade</p>
+          </div>
+          <span class="bg-eco-light text-white px-2 py-1 rounded-full text-xs">Ativo</span>
+        </div>
+        <div class="mt-2 flex items-center text-sm text-gray-500">
+          <i class="fas fa-map-marker-alt mr-1 text-eco-green"></i>
+          <span>Endereço</span>
+        </div>
+        <div class="mt-3 flex justify-between">
+          <button id="rota-btn" class="text-eco-green border border-eco-green px-3 py-1 rounded-full text-sm">
+            <i class="fas fa-route mr-1"></i> Rota
+          </button>
+          <button class="bg-eco-green text-white px-3 py-1 rounded-full text-sm">
+            <i class="fas fa-info-circle mr-1"></i> Detalhes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação inferior -->
+    <div class="flex justify-around items-center py-3 border-t border-gray-200 bg-white">
+      <a href="#" class="flex flex-col items-center text-eco-green nav-item active">
+        <i class="fas fa-map text-xl"></i><span class="text-xs mt-1">Mapa</span>
+      </a>
+      <a href="#" class="flex flex-col items-center text-gray-500 nav-item">
+        <i class="fas fa-list text-xl"></i><span class="text-xs mt-1">Lista</span>
+      </a>
+      <a href="#" class="flex flex-col items-center text-gray-500 nav-item">
+        <i class="fas fa-user text-xl"></i><span class="text-xs mt-1">Perfil</span>
+      </a>
+      <button id="settings-btn" class="flex flex-col items-center text-gray-500 nav-item">
+        <i class="fas fa-cog text-xl"></i><span class="text-xs mt-1">Config</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de configurações -->
+  <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Configurações</h2>
+        <button id="close-settings" class="text-gray-600 text-xl">&times;</button>
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="toggle-dark">Modo Escuro</label>
+        <input type="checkbox" id="toggle-dark" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
