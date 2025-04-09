@@ -25,7 +25,7 @@
 </head>
 <body class="bg-gray-50 font-sans">
   <div class="max-w-md mx-auto bg-white h-screen flex flex-col">
-    <!-- Header -->
+    <!-- Cabeçalho -->
     <div class="p-4 bg-eco-green text-white">
       <h1 class="text-xl font-bold text-center">Compostaqui</h1>
       <div class="mt-3 relative">
@@ -39,14 +39,13 @@
     <div class="flex-1 relative">
       <div class="map-container"><div id="map"></div></div>
 
-      <!-- Botões do mapa -->
       <div class="absolute bottom-4 right-4 flex flex-col space-y-2 z-20">
         <button id="locate-btn" class="bg-white p-2 rounded-full shadow-md text-eco-green">
           <i class="fas fa-location-arrow"></i>
         </button>
       </div>
 
-      <!-- Cartão do biodigestor -->
+      <!-- Card do biodigestor -->
       <div id="biodigestor-card" class="hidden absolute bottom-4 left-0 right-0 mx-4 bg-white rounded-lg shadow-lg p-4 z-20">
         <div class="flex justify-between items-start">
           <div>
@@ -59,12 +58,19 @@
           <i class="fas fa-map-marker-alt mr-1 text-eco-green"></i>
           <span>Endereço</span>
         </div>
-        <div class="mt-3 flex justify-between">
-          <button id="rota-btn" class="text-eco-green border border-eco-green px-3 py-1 rounded-full text-sm">
-            <i class="fas fa-route mr-1"></i> Rota
-          </button>
-          <button class="bg-eco-green text-white px-3 py-1 rounded-full text-sm">
-            <i class="fas fa-info-circle mr-1"></i> Detalhes
+
+        <!-- Tipo (público/privado) e horário -->
+        <div id="tipo-info" class="mt-1 text-sm text-gray-600 flex items-center gap-2">
+          <i class="fas fa-university text-eco-green"></i>
+          <span id="tipo-texto"></span>
+        </div>
+        <div id="horario-info" class="mt-1 text-sm text-gray-600 flex items-center gap-2 hidden">
+          <i class="fas fa-clock text-eco-green"></i>
+          <span id="horario-texto"></span>
+        </div>
+        <div id="reserva-btn-wrapper" class="mt-2 hidden">
+          <button id="abrir-reserva" class="bg-eco-green text-white px-3 py-1 rounded-full text-sm">
+            <i class="fas fa-calendar-alt mr-1"></i> Reservar horário
           </button>
         </div>
       </div>
@@ -97,6 +103,30 @@
       <div class="flex items-center justify-between">
         <label for="toggle-dark">Modo Escuro</label>
         <input type="checkbox" id="toggle-dark" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de reserva -->
+  <div id="reserva-modal" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Reserva de Horário</h2>
+        <button id="fechar-reserva" class="text-gray-600 text-xl">&times;</button>
+      </div>
+      <form id="form-reserva" class="space-y-4">
+        <div>
+          <label class="block text-sm mb-1">Data:</label>
+          <input type="date" id="data-reserva" required class="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Horário:</label>
+          <input type="time" id="hora-reserva" required class="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none">
+        </div>
+        <button type="submit" class="w-full bg-eco-green text-white py-2 rounded">Confirmar Reserva</button>
+      </form>
+      <div id="reserva-confirmada" class="mt-4 text-green-600 font-semibold hidden">
+        ✅ Reserva confirmada com sucesso!
       </div>
     </div>
   </div>
