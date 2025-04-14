@@ -59,3 +59,13 @@ body.dark input, body.dark .search-box {
   background-color: #4b5563;
   color: white;
 }
+
+#lista-biodigestores {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  z-index: 10;
+}
+
