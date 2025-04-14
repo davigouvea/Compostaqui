@@ -158,3 +158,44 @@ window.addEventListener('load', () => {
   document.body.classList.toggle('dark', isDark);
   toggleDark.checked = isDark;
 });
+
+const listaView = document.getElementById('lista-biodigestores');
+const mapaView = document.querySelector('.map-container');
+const cardView = document.getElementById('biodigestor-card');
+const btnLista = document.getElementById('btn-lista');
+const btnMapa = document.getElementById('btn-mapa');
+const listaItens = document.getElementById('lista-itens');
+
+// Alternar para LISTA
+btnLista.addEventListener('click', () => {
+  mapaView.classList.add('hidden');
+  cardView.classList.add('hidden');
+  listaView.classList.remove('hidden');
+  btnMapa.classList.remove('text-eco-green');
+  btnLista.classList.add('text-eco-green');
+  preencherLista();
+});
+
+// Alternar para MAPA
+btnMapa.addEventListener('click', () => {
+  listaView.classList.add('hidden');
+  mapaView.classList.remove('hidden');
+  btnLista.classList.remove('text-eco-green');
+  btnMapa.classList.add('text-eco-green');
+});
+
+function preencherLista() {
+  listaItens.innerHTML = '';
+  biodigestores.forEach(bio => {
+    const li = document.createElement('li');
+    li.className = 'p-3 rounded bg-gray-100 hover:bg-eco-light hover:text-white cursor-pointer transition';
+    li.textContent = `${bio.nome} - ${bio.status} - ${bio.endereco}`;
+    li.addEventListener('click', () => {
+      btnMapa.click(); // volta para mapa
+      map.setView([bio.lat, bio.lng], 16);
+      L.popup().setLatLng([bio.lat, bio.lng]).setContent(`<strong>${bio.nome}</strong>`).openOn(map);
+    });
+    listaItens.appendChild(li);
+  });
+}
+
