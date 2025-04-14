@@ -78,19 +78,21 @@
 
     <!-- Navegação inferior -->
     <div class="flex justify-around items-center py-3 border-t border-gray-200 bg-white">
-      <a href="#" class="flex flex-col items-center text-eco-green nav-item active">
+      <a id="btn-mapa" href="#" class="flex flex-col items-center text-eco-green nav-item active">
         <i class="fas fa-map text-xl"></i><span class="text-xs mt-1">Mapa</span>
       </a>
-      <a href="#" class="flex flex-col items-center text-gray-500 nav-item">
+      <a id="btn-lista" href="#" class="flex flex-col items-center text-gray-500 nav-item">
         <i class="fas fa-list text-xl"></i><span class="text-xs mt-1">Lista</span>
-      </a>
-      <a href="#" class="flex flex-col items-center text-gray-500 nav-item">
-        <i class="fas fa-user text-xl"></i><span class="text-xs mt-1">Perfil</span>
       </a>
       <button id="settings-btn" class="flex flex-col items-center text-gray-500 nav-item">
         <i class="fas fa-cog text-xl"></i><span class="text-xs mt-1">Config</span>
       </button>
     </div>
+
+    <!-- Lista de biodigestores -->
+  <div id="lista-biodigestores" class="hidden p-4 bg-white h-full overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4 text-eco-dark text-center">Lista de Biodigestores</h2>
+    <ul id="lista-itens" class="space-y-2"></ul>
   </div>
 
   <!-- Modal de configurações -->
